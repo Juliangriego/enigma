@@ -25,8 +25,10 @@ module.exports = function(dbInyectada){
         }
         const respuesta = await db.agregar(TABLA, usuario); //Cuando se agrega el registro necesitamos que nos devuelva el Id
         var insertID = 0;
-        if (data.id === 0){ //Si el usuario ingresa un id 0 es porque es un registro nuevo (en verdad en mysql.js terminé poniendo un booleano para esa comparación)
-            insertID = respuesta.insertID //En caso que sea un registro nuevo, guardamos en insertID el ID de la respuesta
+        
+        if (data.id === 0){ //Si el usuario ingresa un id 0 es porque es un registro nuevo (en verdad en mysql.js terminé poniendo un booleano para esa comparación). Actualizo: no usa más booleano
+            //insertID = respuesta.insertID //En caso que sea un registro nuevo, guardamos en insertID el ID de la respuesta
+            insertID = usuario.id //Debería ser respuesta.id, ¿No?
         } else {
             insertID = data.id; //En caso que sea una actualización, guardamos en insertID lo que nos mandó el usuario
         }
